@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_app/widgets/post.dart';
 
 class FeedScreen extends StatelessWidget {
   @override
@@ -39,9 +40,7 @@ class FeedScreen extends StatelessWidget {
     );
   }
   Widget feedListBuilder(BuildContext context, int index){
-    return Container(
-      color: Colors.accents[index % Colors.accents.length],
-      height: 100,
-    );
+    return Post(index);
   }
 }
+
