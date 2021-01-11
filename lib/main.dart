@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/material_white.dart';
 import 'package:flutter_app/home.dart';
 
 void main(){
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomePage(),
+      theme: ThemeData(primarySwatch: white),
     );
   }
 }
