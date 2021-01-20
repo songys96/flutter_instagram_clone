@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_app/constants/common_size.dart';
 import 'package:flutter_app/widgets/my_progress_indicator.dart';
+import 'package:flutter_app/widgets/rounded_avatar.dart';
 
 
 class Post extends StatelessWidget {
@@ -32,22 +33,7 @@ class Post extends StatelessWidget {
         //image, name, more
         Padding(
           padding: const EdgeInsets.all(common_xxs_gap),
-          child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: 'https://picsum.photos/100',
-              placeholder: ( BuildContext context, String url){
-                return SizedBox(
-                  child: Container(
-                    child: Image.asset('assets/images/avatar.jpg'),
-                    width: avatar_size,
-                    height: avatar_size,
-                  ),
-                );
-              },
-              width: avatar_size,
-              height: avatar_size,
-            ),
-          ),
+          child: RoundedAvatar(),
         ),
         Expanded(child: Text('yunsong')),
         IconButton(
@@ -76,3 +62,4 @@ class Post extends StatelessWidget {
   );
   }
 }
+
