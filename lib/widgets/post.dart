@@ -19,10 +19,15 @@ class Post extends StatelessWidget {
     if (size==null) size = MediaQuery.of(context).size;
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         _postHeader(),
         _postImage(),
-        _postAction()
+        _postAction(),
+        Padding(
+          padding: const EdgeInsets.only(left: common_gap),
+          child: Text('12000 likes', style: TextStyle(fontWeight: FontWeight.bold),),
+        ),
       ],
     );
 
