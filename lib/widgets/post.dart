@@ -21,10 +21,35 @@ class Post extends StatelessWidget {
     return Column(
       children: <Widget>[
         _postHeader(),
-        _postImage()
+        _postImage(),
+        _postAction()
       ],
     );
 
+  }
+
+  Row _postAction() {
+    return Row(
+        children: <Widget>[
+          IconButton(
+              icon: ImageIcon(AssetImage('assets/images/bookmark.png')),
+              color: Colors.black87,
+              onPressed: null),
+          IconButton(
+              icon: ImageIcon(AssetImage('assets/images/comment.png')),
+              color: Colors.black87,
+              onPressed: null),
+          IconButton(
+              icon: ImageIcon(AssetImage('assets/images/direct_message.png')),
+              color: Colors.black87,
+              onPressed: null),
+          Spacer(),
+          IconButton(
+              icon: ImageIcon(AssetImage('assets/images/like.png')),
+              color: Colors.black87,
+              onPressed: null),
+        ],
+      );
   }
 
   Widget _postHeader() {
