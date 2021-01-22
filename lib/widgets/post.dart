@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_app/constants/common_size.dart';
+import 'package:flutter_app/widgets/comment.dart';
 import 'package:flutter_app/widgets/my_progress_indicator.dart';
 import 'package:flutter_app/widgets/rounded_avatar.dart';
 
@@ -24,13 +25,32 @@ class Post extends StatelessWidget {
         _postHeader(),
         _postImage(),
         _postAction(),
-        Padding(
-          padding: const EdgeInsets.only(left: common_gap),
-          child: Text('12000 likes', style: TextStyle(fontWeight: FontWeight.bold),),
-        ),
+        _postLikes(),
+        _postCaption(),
       ],
     );
 
+  }
+
+  // ignore: missing_return
+  Widget _postCaption() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: common_gap, vertical: common_xxs_gap
+      ),
+      child: Comment(
+          showImage:false,
+          username:"songs",
+          text:"holy shit",
+          ),
+    );
+  }
+
+  Padding _postLikes() {
+    return Padding(
+        padding: const EdgeInsets.only(left: common_gap),
+        child: Text('12000 likes', style: TextStyle(fontWeight: FontWeight.bold),),
+      );
   }
 
   Row _postAction() {
@@ -73,7 +93,7 @@ class Post extends StatelessWidget {
     );
   }
 
-  CachedNetworkImage _postImage() {
+  CachedNetworkImage __postImage() {
     return CachedNetworkImage(
     imageUrl: 'https://picsum.photos/id/$index/100/100',
     placeholder: (BuildContext context, String url){
@@ -91,5 +111,11 @@ class Post extends StatelessWidget {
     },
   );
   }
+  
+  Image _postImage(){
+    return Image(
+        image: AssetImage('assets/images/avatar.jpg'));
+  }
 }
+
 
