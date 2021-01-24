@@ -12,6 +12,8 @@ class ProfileBody extends StatefulWidget {
 class _ProfileBodyState extends State<ProfileBody> {
 
   SelectedTab _selectedLeft = SelectedTab.left;
+  double _leftImagesPageMargin = 0;
+  double _rightImagesPageMargin = size.width;
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +28,44 @@ class _ProfileBodyState extends State<ProfileBody> {
             _selectedIndicator()
           ]
           )),
-          SliverToBoxAdapter(
-            child: GridView.count(
-              crossAxisCount: 3,
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              childAspectRatio: 1,
-              children: List.generate(
-                  20, 
-                      (index) => Image(image: AssetImage("assets/images/avatar.jpg"))),
-            ),
-          )
+          _imagesPager()
         ],
       ),
     );
+  }
+
+  SliverToBoxAdapter _imagesPager() {
+    return SliverToBoxAdapter(
+          child: Stack(
+            children: [
+              AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                transform: Matrix4.translationValues(_leftImagesPageMargin, 0, 0),
+                child: _images(0),
+            ),AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                transform: Matrix4.translationValues(_rightImagesPageMargin, 0, 0),
+                child: _images(1)
+              ),]
+          ),
+        );
+  }
+
+  GridView _images(int pageNum) {
+    String imageName;
+    pageNum==0?imageName='avatar':imageName='selfie';
+
+    return GridView.count(
+                crossAxisCount: 3,
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                childAspectRatio: 1,
+                children: List.generate(
+                    20,
+                        (index) => Image(image: AssetImage("assets/images/$imageName.jpg"))),
+            );
   }
 
   AnimatedContainer _selectedIndicator() {
@@ -63,6 +89,8 @@ class _ProfileBodyState extends State<ProfileBody> {
                   onPressed: (){
                     setState(() {
                       _selectedLeft=SelectedTab.left;
+                      _leftImagesPageMargin = 0;
+                      _rightImagesPageMargin = size.width;
                     });
                   })),
               Expanded(child: IconButton(
@@ -70,6 +98,8 @@ class _ProfileBodyState extends State<ProfileBody> {
                   onPressed: (){
                     setState(() {
                       _selectedLeft=SelectedTab.right;
+                      _leftImagesPageMargin = -size.width;
+                      _rightImagesPageMargin = 0;
                     });
                   })),
 
