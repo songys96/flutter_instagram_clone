@@ -25,7 +25,18 @@ class _ProfileBodyState extends State<ProfileBody> {
             _tapButtons(),
             _selectedIndicator()
           ]
-          ))
+          )),
+          SliverToBoxAdapter(
+            child: GridView.count(
+              crossAxisCount: 3,
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              childAspectRatio: 1,
+              children: List.generate(
+                  20, 
+                      (index) => Image(image: AssetImage("assets/images/avatar.jpg"))),
+            ),
+          )
         ],
       ),
     );
