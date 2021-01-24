@@ -11,7 +11,7 @@ class ProfileBody extends StatefulWidget {
 
 class _ProfileBodyState extends State<ProfileBody> {
 
-  bool selectedLeft = true;
+  SelectedTab _selectedLeft = SelectedTab.left;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class _ProfileBodyState extends State<ProfileBody> {
   AnimatedContainer _selectedIndicator() {
     return AnimatedContainer(
             duration: Duration(milliseconds: 100),
-            alignment: selectedLeft?Alignment.centerLeft:Alignment.centerRight,
+            alignment: _selectedLeft==SelectedTab.left?Alignment.centerLeft:Alignment.centerRight,
             child: Container(
               height: 3,
               width: size.width/2,
@@ -48,17 +48,17 @@ class _ProfileBodyState extends State<ProfileBody> {
     return Row(
             children: [
               Expanded(child: IconButton(
-                  icon: ImageIcon(AssetImage("assets/images/grid.png"), color: selectedLeft?Colors.black:Colors.grey,),
+                  icon: ImageIcon(AssetImage("assets/images/grid.png"), color:  _selectedLeft==SelectedTab.left?Colors.black:Colors.grey,),
                   onPressed: (){
                     setState(() {
-                      selectedLeft=true;
+                      _selectedLeft=SelectedTab.left;
                     });
                   })),
               Expanded(child: IconButton(
-                  icon: ImageIcon(AssetImage("assets/images/saved.png"), color: selectedLeft?Colors.grey:Colors.black,),
+                  icon: ImageIcon(AssetImage("assets/images/saved.png"), color:  _selectedLeft==SelectedTab.left?Colors.grey:Colors.black,),
                   onPressed: (){
                     setState(() {
-                      selectedLeft=false;
+                      _selectedLeft=SelectedTab.right;
                     });
                   })),
 
@@ -97,3 +97,5 @@ class _ProfileBodyState extends State<ProfileBody> {
       child: Text('username', style: TextStyle(fontWeight: FontWeight.bold),),
     );
   }
+
+  enum SelectedTab{left, right}
