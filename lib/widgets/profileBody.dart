@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/common_size.dart';
+import 'package:flutter_app/constants/screens_size.dart';
 
 class ProfileBody extends StatefulWidget {
 
@@ -21,30 +22,48 @@ class _ProfileBodyState extends State<ProfileBody> {
             _username(),
             _userbio(),
             _editProfileButton(),
-            Row(
-              children: [
-                Expanded(child: IconButton(
-                    icon: ImageIcon(AssetImage("assets/images/grid.png"), color: selectedLeft?Colors.black:Colors.grey,),
-                    onPressed: (){
-                      setState(() {
-                        selectedLeft=true;
-                      });
-                    })),
-                Expanded(child: IconButton(
-                    icon: ImageIcon(AssetImage("assets/images/saved.png"), color: selectedLeft?Colors.grey:Colors.black,),
-                    onPressed: (){
-                      setState(() {
-                        selectedLeft=false;
-                      });
-                    })),
-
-              ],
-            )
+            _tapButtons(),
+            _selectedIndicator()
           ]
           ))
         ],
       ),
     );
+  }
+
+  AnimatedContainer _selectedIndicator() {
+    return AnimatedContainer(
+            duration: Duration(milliseconds: 100),
+            alignment: selectedLeft?Alignment.centerLeft:Alignment.centerRight,
+            child: Container(
+              height: 3,
+              width: size.width/2,
+              color: Colors.black,
+            ),
+            curve: Curves.easeInOut,
+          );
+  }
+
+  Row _tapButtons() {
+    return Row(
+            children: [
+              Expanded(child: IconButton(
+                  icon: ImageIcon(AssetImage("assets/images/grid.png"), color: selectedLeft?Colors.black:Colors.grey,),
+                  onPressed: (){
+                    setState(() {
+                      selectedLeft=true;
+                    });
+                  })),
+              Expanded(child: IconButton(
+                  icon: ImageIcon(AssetImage("assets/images/saved.png"), color: selectedLeft?Colors.grey:Colors.black,),
+                  onPressed: (){
+                    setState(() {
+                      selectedLeft=false;
+                    });
+                  })),
+
+            ],
+          );
   }
 }
   Widget _editProfileButton() {
