@@ -34,6 +34,9 @@ class _ProfileBodyState extends State<ProfileBody> {
     );
   }
 
+
+
+
   SliverToBoxAdapter _imagesPager() {
     return SliverToBoxAdapter(
           child: Stack(
@@ -70,15 +73,30 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   AnimatedContainer _selectedIndicator() {
     return AnimatedContainer(
-            duration: Duration(milliseconds: 100),
+            duration: Duration(milliseconds: 300),
             alignment: _selectedLeft==SelectedTab.left?Alignment.centerLeft:Alignment.centerRight,
             child: Container(
               height: 3,
               width: size.width/2,
               color: Colors.black,
             ),
-            curve: Curves.easeInOut,
+            curve: Curves.fastOutSlowIn,
           );
+  }
+
+  _tabSelected(SelectedTab selectedTab) {
+      switch (selectedTab) {
+        case SelectedTab.left:
+          _selectedLeft = SelectedTab.left;
+          _leftImagesPageMargin = 0;
+          _rightImagesPageMargin = size.width;
+          break;
+        case SelectedTab.right:
+          _selectedLeft = SelectedTab.right;
+          _leftImagesPageMargin = -size.width;
+          _rightImagesPageMargin = 0;
+          break;
+    }
   }
 
   Row _tapButtons() {
@@ -88,18 +106,14 @@ class _ProfileBodyState extends State<ProfileBody> {
                   icon: ImageIcon(AssetImage("assets/images/grid.png"), color:  _selectedLeft==SelectedTab.left?Colors.black:Colors.grey,),
                   onPressed: (){
                     setState(() {
-                      _selectedLeft=SelectedTab.left;
-                      _leftImagesPageMargin = 0;
-                      _rightImagesPageMargin = size.width;
+                      _tabSelected(SelectedTab.left);
                     });
                   })),
               Expanded(child: IconButton(
                   icon: ImageIcon(AssetImage("assets/images/saved.png"), color:  _selectedLeft==SelectedTab.left?Colors.grey:Colors.black,),
                   onPressed: (){
                     setState(() {
-                      _selectedLeft=SelectedTab.right;
-                      _leftImagesPageMargin = -size.width;
-                      _rightImagesPageMargin = 0;
+                      _tabSelected(SelectedTab.right);
                     });
                   })),
 
