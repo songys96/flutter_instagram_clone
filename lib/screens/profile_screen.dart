@@ -11,9 +11,17 @@ class ProfileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _appbar(),
-            _username(),
-            _userbio(),
-            _editProfileButton()
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  SliverList(delegate: SliverChildListDelegate([
+                      _username(),
+                      _userbio(),
+                      _editProfileButton(),]
+                  ))
+                ],
+              ),
+            ),
           ],
         ),
       ),
