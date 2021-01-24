@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/common_size.dart';
 import 'package:flutter_app/constants/screens_size.dart';
+import 'package:flutter_app/widgets/rounded_avatar.dart';
 
 class ProfileBody extends StatefulWidget {
 
@@ -21,6 +22,36 @@ class _ProfileBodyState extends State<ProfileBody> {
       child: CustomScrollView(
         slivers: [
           SliverList(delegate: SliverChildListDelegate([
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: common_gap),
+                  child: RoundedAvatar(size: 60,),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: common_gap),
+                    child: Table(
+                      children: [
+                        TableRow(
+                          children: [
+                            _valueText('123'),
+                            _valueText('123'),
+                            _valueText('123'),
+                          ]
+                      ),
+                        TableRow(
+                            children: [
+                              _labelText('Posts'),
+                              _labelText('Followers'),
+                              _labelText('Following'),
+                            ]
+                        ),
+                      ],),
+                  ),
+                ),
+              ],
+            ),
             _username(),
             _userbio(),
             _editProfileButton(),
@@ -34,8 +65,17 @@ class _ProfileBodyState extends State<ProfileBody> {
     );
   }
 
+ Widget _valueText(String value) => Text(
+   value,
+   textAlign: TextAlign.center,
+   style: TextStyle(fontWeight: FontWeight.bold),
+ );
 
-
+  Widget _labelText(String value) => Text(
+    value,
+    textAlign: TextAlign.center,
+    style: TextStyle(fontWeight: FontWeight.w300, fontSize: 12),
+  );
 
   SliverToBoxAdapter _imagesPager() {
     return SliverToBoxAdapter(
