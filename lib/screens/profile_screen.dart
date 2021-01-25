@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       break;
                     case MenuStatus.opened:
                       bodyXPos = - menuWidth;
-                      menuXPos = menuWidth;
+                      menuXPos = size.width - menuWidth;
                       break;
                   }
                 }
@@ -47,12 +47,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               duration: _duration,
             ),
             AnimatedContainer(
-              child: Positioned(
-                child: ProfileSideMenu(menuWidth),
-                top: 0,
-                bottom: 0,
-                width: menuWidth,
-              ),
+              child: ProfileSideMenu(menuWidth),
               transform: Matrix4.translationValues(menuXPos, 0, 0),
               duration: _duration,
             )

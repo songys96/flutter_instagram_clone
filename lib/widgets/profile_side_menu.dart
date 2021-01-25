@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/screens_size.dart';
 
 class ProfileSideMenu extends StatelessWidget {
 
@@ -15,11 +16,11 @@ class ProfileSideMenu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ListTile(
-              title: Text("설정"),
+              title: Text("setting"),
             ),
             ListTile(
               leading: Icon(Icons.exit_to_app),
-              title: Text("로그아웃", style: TextStyle(color: Colors.black),),
+              title: Text("sign out", style: TextStyle(color: Colors.black),),
             ),
           ],
         ),
