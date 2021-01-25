@@ -17,9 +17,11 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
           children: [
             FadeStack(selectedForm: selectedForm,),
             Positioned(
-              left: 0, right: 0, bottom: 0,
+              left: 0, right: 0, bottom: 0, height: 40,
               child: Container(
                 child: FlatButton(
+                  color: Colors.white,
+                    shape: Border(top: BorderSide(color: Colors.grey)),
                     onPressed: (){
                       setState(() {
                         if (selectedForm == 0)
