@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/common_size.dart';
 import 'package:flutter_app/constants/screens_size.dart';
-import 'package:flutter_app/widgets/profileBody.dart';
+import 'package:flutter_app/widgets/profile_body.dart';
+import 'package:flutter_app/widgets/profile_side_menu.dart';
+
+const _duration = Duration(milliseconds: 300);
 
 class ProfileScreen extends StatefulWidget {
 
@@ -10,8 +13,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final Duration _duration = Duration(milliseconds: 300);
-  final menuWidth = size.width/2;
+  final menuWidth = size.width/3*2;
 
   MenuStatus _menuStatus = MenuStatus.closed;
   double bodyXPos = 0;
@@ -46,9 +48,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             AnimatedContainer(
               child: Positioned(
-                child: Container(
-                  color: Colors.red,
-                ),
+                child: ProfileSideMenu(menuWidth),
                 top: 0,
                 bottom: 0,
                 width: menuWidth,

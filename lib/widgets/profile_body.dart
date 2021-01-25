@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/common_size.dart';
 import 'package:flutter_app/constants/screens_size.dart';
 import 'package:flutter_app/widgets/rounded_avatar.dart';
+import 'package:flutter_app/screens/profile_screen.dart';
+
+const _duration = Duration(milliseconds: 300);
 
 class ProfileBody extends StatefulWidget {
 
@@ -110,12 +113,12 @@ class _ProfileBodyState extends State<ProfileBody> {
           child: Stack(
             children: [
               AnimatedContainer(
-                duration: Duration(milliseconds: 300),
+                duration: _duration,
                 curve: Curves.easeInOut,
                 transform: Matrix4.translationValues(_leftImagesPageMargin, 0, 0),
                 child: _images(0),
             ),AnimatedContainer(
-                duration: Duration(milliseconds: 300),
+                duration: _duration,
                 curve: Curves.easeInOut,
                 transform: Matrix4.translationValues(_rightImagesPageMargin, 0, 0),
                 child: _images(1)
@@ -141,7 +144,7 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   AnimatedContainer _selectedIndicator() {
     return AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+            duration: _duration,
             alignment: _selectedLeft==SelectedTab.left?Alignment.centerLeft:Alignment.centerRight,
             child: Container(
               height: 3,
