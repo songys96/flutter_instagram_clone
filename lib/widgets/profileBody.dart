@@ -6,11 +6,16 @@ import 'package:flutter_app/widgets/rounded_avatar.dart';
 
 class ProfileBody extends StatefulWidget {
 
+  final Function onMenuChanged;
+
+  const ProfileBody({Key key, this.onMenuChanged}) : super(key: key);
+
   @override
   _ProfileBodyState createState() => _ProfileBodyState();
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
+
 
   SelectedTab _selectedLeft = SelectedTab.left;
   double _leftImagesPageMargin = 0;
@@ -18,50 +23,73 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: CustomScrollView(
-        slivers: [
-          SliverList(delegate: SliverChildListDelegate([
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: common_gap),
-                  child: RoundedAvatar(size: 60,),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: common_gap),
-                    child: Table(
-                      children: [
-                        TableRow(
-                          children: [
-                            _valueText('123'),
-                            _valueText('123'),
-                            _valueText('123'),
-                          ]
-                      ),
-                        TableRow(
-                            children: [
-                              _labelText('Posts'),
-                              _labelText('Followers'),
-                              _labelText('Following'),
-                            ]
-                        ),
-                      ],),
+    return SafeArea(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          _appbar(),
+          Expanded(
+        child: CustomScrollView(
+          slivers: [
+            SliverList(delegate: SliverChildListDelegate([
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: common_gap),
+                    child: RoundedAvatar(size: 60,),
                   ),
-                ),
-              ],
-            ),
-            _username(),
-            _userbio(),
-            _editProfileButton(),
-            _tapButtons(),
-            _selectedIndicator()
-          ]
-          )),
-          _imagesPager()
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: common_gap),
+                      child: Table(
+                        children: [
+                          TableRow(
+                              children: [
+                                _valueText('2'),
+                                _valueText('107'),
+                                _valueText('78'),
+                              ]
+                          ),
+                          TableRow(
+                              children: [
+                                _labelText('Posts'),
+                                _labelText('Followers'),
+                                _labelText('Following'),
+                              ]
+                          ),
+                        ],),
+                    ),
+                  ),
+                ],
+              ),
+              _username(),
+              _userbio(),
+              _editProfileButton(),
+              _tapButtons(),
+              _selectedIndicator()
+            ]
+            )),
+            _imagesPager()
+          ],
+        ),
+      ),
+
         ],
       ),
+    );
+  }
+
+  Row _appbar() {
+    return Row(
+      children: [
+        SizedBox(width: 44,),
+        Expanded(child: Text("songyunsang", textAlign: TextAlign.center, style: TextStyle(fontSize: 17),)),
+        IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: (){
+              widget.onMenuChanged();
+            })
+      ],
     );
   }
 
