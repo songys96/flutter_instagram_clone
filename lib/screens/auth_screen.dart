@@ -1,25 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/constants/durations.dart';
-import 'package:flutter_app/widgets/sign_in_form.dart';
-import 'package:flutter_app/widgets/sign_up_form.dart';
+import 'package:flutter_app/widgets/fade_stack.dart';
 
 class AuthScreen extends StatefulWidget {
   @override
   _AuthScreenState createState() => _AuthScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
-
-  Widget signUpForm = SignUpForm();
-  Widget signInForm = SignInForm();
-  Widget currentWidget;
-
-  @override
-  void initState() {
-    if(currentWidget == null)
-      Widget currentWidget  = signInForm;
-    super.initState();
-  }
+class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateMixin{
+  int selectedForm = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -27,17 +15,15 @@ class _AuthScreenState extends State<AuthScreen> {
       body: SafeArea(
         child: Stack(
           children: [
-            AnimatedSwitcher(
-              child: currentWidget,
-              duration: duration3,),
+            FadeStack(selectedForm: selectedForm,),
             Container(
               child: FlatButton(
                   onPressed: (){
                     setState(() {
-                      if (currentWidget is SignUpForm)
-                        currentWidget = signInForm;
+                      if (selectedForm == 0)
+                        selectedForm = 1;
                       else
-                        currentWidget = signUpForm;
+                        selectedForm = 0;
                     });
                   },
                   child: Text("Sign")),
