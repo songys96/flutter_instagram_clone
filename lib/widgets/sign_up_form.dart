@@ -73,9 +73,12 @@ class _SignUpFormState extends State<SignUpForm> {
                       return "입력한 값이 일치하지 않습니다";
                   },
                   decoration: textInputDecor("Confirm Password")),
-              SizedBox(
-                height: common_xs_gap,
-              ),
+              FlatButton(
+                  onPressed: (){},
+                  child: Align(
+                    child: Text("forgot your password?"),
+                    alignment: Alignment.centerRight,
+                  )),
               _submitButton(context),
               SizedBox(height: common_gap,),
               OrDivider(),
