@@ -9,7 +9,8 @@ class CameraScreen extends StatefulWidget {
 class _CameraScreenState extends State<CameraScreen> {
 
   int _currentIndex = 1;
-  PageController _pageController = PageController();
+  String _title = "Photo";
+  PageController _pageController = PageController(initialPage: 1);
 
   @override
   void dispose() {
@@ -20,6 +21,7 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text(_title),),
       body: PageView(
         controller: _pageController,
         children: <Widget>[
@@ -54,6 +56,17 @@ class _CameraScreenState extends State<CameraScreen> {
   void _onPageChanged(index){
     setState(() {
       _currentIndex = index;
+      switch (index) {
+        case 0:
+          _title = "Gallery";
+          break;
+        case 1:
+          _title = "Photo";
+          break;
+        case 2:
+          _title = "Video";
+          break;
+      }
     });
   }
 }
