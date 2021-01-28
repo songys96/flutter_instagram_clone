@@ -20,71 +20,74 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(common_l_gap),
-      child: Form(
-        key: _formKey,
-        child: ListView(
-          children: [
-            SizedBox(
-              height: common_l_gap,
-            ),
-            Image.asset("assets/images/insta_text_logo.png"),
-            TextFormField(
-                cursorColor: Colors.black87,
-                controller: _emailController,
-                validator: (text) {
-                  if (text.isNotEmpty && text.contains("@"))
-                    return null;
-                  else
-                    return "Check your Email address";
-                },
-                decoration: _textInputDecor("Email")),
-            SizedBox(
-              height: common_xs_gap,
-            ),
-            TextFormField(
-                cursorColor: Colors.black87,
-                obscureText: true,
-                controller: _pwController,
-                validator: (text) {
-                  if (text.isNotEmpty)
-                    return null;
-                  else
-                    return "비밀번호가 비어있습니다.";
-                },
-                decoration: _textInputDecor("Password")),
-            SizedBox(
-              height: common_xs_gap,
-            ),
-            TextFormField(
-                cursorColor: Colors.black87,
-                obscureText: true,
-                controller: _cpwController,
-                validator: (text) {
-                  if (text.isNotEmpty && _pwController.text == text)
-                    return null;
-                  else
-                    return "입력한 값이 일치하지 않습니다";
-                },
-                decoration: _textInputDecor("Confirm Password")),
-            SizedBox(
-              height: common_xs_gap,
-            ),
-            FlatButton(
-                onPressed: () {
-                  _formKey.currentState.validate();
-                },
-                color: Colors.blue,
-                child: Text(
-                  "join",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                )),
-          ],
+    return Scaffold(
+      resizeToAvoidBottomInset: true,
+      body: Padding(
+        padding: const EdgeInsets.all(common_l_gap),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: [
+              SizedBox(
+                height: common_l_gap,
+              ),
+              Image.asset("assets/images/insta_text_logo.png"),
+              TextFormField(
+                  cursorColor: Colors.black87,
+                  controller: _emailController,
+                  validator: (text) {
+                    if (text.isNotEmpty && text.contains("@"))
+                      return null;
+                    else
+                      return "Check your Email address";
+                  },
+                  decoration: _textInputDecor("Email")),
+              SizedBox(
+                height: common_xs_gap,
+              ),
+              TextFormField(
+                  cursorColor: Colors.black87,
+                  obscureText: true,
+                  controller: _pwController,
+                  validator: (text) {
+                    if (text.isNotEmpty)
+                      return null;
+                    else
+                      return "비밀번호가 비어있습니다.";
+                  },
+                  decoration: _textInputDecor("Password")),
+              SizedBox(
+                height: common_xs_gap,
+              ),
+              TextFormField(
+                  cursorColor: Colors.black87,
+                  obscureText: true,
+                  controller: _cpwController,
+                  validator: (text) {
+                    if (text.isNotEmpty && _pwController.text == text)
+                      return null;
+                    else
+                      return "입력한 값이 일치하지 않습니다";
+                  },
+                  decoration: _textInputDecor("Confirm Password")),
+              SizedBox(
+                height: common_xs_gap,
+              ),
+              FlatButton(
+                  onPressed: () {
+                    _formKey.currentState.validate();
+                  },
+                  color: Colors.blue,
+                  child: Text(
+                    "join",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  )),
+            ],
+          ),
         ),
       ),
     );
@@ -95,15 +98,21 @@ class _SignUpFormState extends State<SignUpForm> {
         hintText: hintText,
         filled: true,
         fillColor: Colors.grey[100],
-        enabledBorder: _outlineInputBorder(Colors.grey),
-        errorBorder: _outlineInputBorder(Colors.redAccent),
-        focusedBorder: _outlineInputBorder(Colors.grey),
-        focusedErrorBorder: _outlineInputBorder(Colors.redAccent));
+        enabledBorder: _activeInputBorder(),
+        focusedBorder: _activeInputBorder(),
+        errorBorder: _errorInputBorder(),
+        focusedErrorBorder: _errorInputBorder());
   }
 
-  OutlineInputBorder _outlineInputBorder(Color borderColor) {
+  OutlineInputBorder _activeInputBorder() {
     return OutlineInputBorder(
-        borderSide: BorderSide(color: borderColor),
+        borderSide: BorderSide(color: Colors.grey),
         borderRadius: BorderRadius.circular(common_s_gap));
   }
+  OutlineInputBorder _errorInputBorder() {
+    return OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.redAccent),
+        borderRadius: BorderRadius.circular(common_s_gap));
+  }
+
 }
