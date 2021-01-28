@@ -18,6 +18,7 @@ class _SignInFormState extends State<SignInForm> {
   @override
   void dispose() {
     _emailController.dispose();
+    _pwController.dispose();
     super.dispose();
   }
 

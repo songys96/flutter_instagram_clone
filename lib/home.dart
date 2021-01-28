@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/camera_screen.dart';
 import 'package:flutter_app/screens/feed_screen.dart';
 import 'package:flutter_app/screens/profile_screen.dart';
 
@@ -53,9 +54,20 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onBtnItemClick(int idx){
-    setState(() {
-      _selectedIndex = idx;
-    });
+    switch (idx) {
+      case 2:
+        _openCamera();
+        break;
+      default:
+        setState(() {
+          _selectedIndex = idx;
+        });
+        break;
+    }
+  }
+
+  void _openCamera() {
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CameraScreen()));
   }
 
 }
