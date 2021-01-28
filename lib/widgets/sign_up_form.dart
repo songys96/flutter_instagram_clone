@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/constants/auth_input_decor.dart';
 import 'package:flutter_app/constants/common_size.dart';
 import 'package:flutter_app/home.dart';
+import 'package:flutter_app/widgets/or_divider.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -42,7 +44,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     else
                       return "Check your Email address";
                   },
-                  decoration: _textInputDecor("Email")),
+                  decoration: textInputDecor("Email")),
               SizedBox(
                 height: common_xs_gap,
               ),
@@ -56,7 +58,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     else
                       return "비밀번호가 비어있습니다.";
                   },
-                  decoration: _textInputDecor("Password")),
+                  decoration: textInputDecor("Password")),
               SizedBox(
                 height: common_xs_gap,
               ),
@@ -70,46 +72,19 @@ class _SignUpFormState extends State<SignUpForm> {
                     else
                       return "입력한 값이 일치하지 않습니다";
                   },
-                  decoration: _textInputDecor("Confirm Password")),
+                  decoration: textInputDecor("Confirm Password")),
               SizedBox(
                 height: common_xs_gap,
               ),
-              FlatButton(
-                  onPressed: () {
-                    _formKey.currentState.validate();
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (context)=>HomePage())
-                    );
-                  },
-                  color: Colors.blue,
-                  child: Text(
-                    "join",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  )
-              ),
+              _submitButton(context),
               SizedBox(height: common_gap,),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  Positioned(
-                    left: 0, right: 0, height: 1,
-                    child: Container(
-                      height: 1,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  Container(
-                    height: 3,
-                    width: 40,
-                    color: Colors.grey[50],
-                  ),
-                  Text("OR", style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),)
-                ],
-              )
+              OrDivider(),
+              SizedBox(height: common_gap,),
+              FlatButton.icon(
+                  onPressed: (){},
+                  textColor: Colors.blue,
+                  icon: ImageIcon(AssetImage("assets/images/facebook.png")),
+                  label: Text("Login with Facebook"))
             ],
           ),
         ),
@@ -117,26 +92,26 @@ class _SignUpFormState extends State<SignUpForm> {
     );
   }
 
-  InputDecoration _textInputDecor(String hintText) {
-    return InputDecoration(
-        hintText: hintText,
-        filled: true,
-        fillColor: Colors.grey[100],
-        enabledBorder: _activeInputBorder(),
-        focusedBorder: _activeInputBorder(),
-        errorBorder: _errorInputBorder(),
-        focusedErrorBorder: _errorInputBorder());
+  FlatButton _submitButton(BuildContext context) {
+    return FlatButton(
+                onPressed: () {
+                  _formKey.currentState.validate();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context)=>HomePage())
+                  );
+                },
+                color: Colors.blue,
+                child: Text(
+                  "join",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                )
+            );
   }
 
-  OutlineInputBorder _activeInputBorder() {
-    return OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey),
-        borderRadius: BorderRadius.circular(common_s_gap));
-  }
-  OutlineInputBorder _errorInputBorder() {
-    return OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.redAccent),
-        borderRadius: BorderRadius.circular(common_s_gap));
-  }
 
 }
+
