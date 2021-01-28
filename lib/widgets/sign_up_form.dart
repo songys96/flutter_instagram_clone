@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/common_size.dart';
+import 'package:flutter_app/home.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -76,6 +77,9 @@ class _SignUpFormState extends State<SignUpForm> {
               FlatButton(
                   onPressed: () {
                     _formKey.currentState.validate();
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context)=>HomePage())
+                    );
                   },
                   color: Colors.blue,
                   child: Text(
