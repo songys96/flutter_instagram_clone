@@ -51,6 +51,7 @@ class _TakePhotoState extends State<TakePhoto> {
   Widget _getPreview (cameras) {
     _controller = CameraController(cameras[0], ResolutionPreset.medium);
     return FutureBuilder(
+        future: _controller.initialize(),
         builder: (context, snapshot){
           if (snapshot.connectionState == ConnectionState.done)
             return ClipRect(
