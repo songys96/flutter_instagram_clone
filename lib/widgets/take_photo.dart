@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/screens_size.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class TakePhoto extends StatelessWidget {
   const TakePhoto({

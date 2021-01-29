@@ -1,7 +1,10 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/camera_screen.dart';
 import 'package:flutter_app/screens/feed_screen.dart';
 import 'package:flutter_app/screens/profile_screen.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'constants/screens_size.dart';
 
@@ -66,8 +69,33 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void _openCamera() {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => CameraScreen()));
+  void _openCamera() async {
+   if (await checkIfPermissionGranted(context)){
+     Navigator.of(context).push(MaterialPageRoute(builder: (context) => CameraScreen()));
+   }else{
+     SnackBar snackBar = SnackBar(
+       content: Text("제발 카메라 허용좀..."),
+       action: SnackBarAction(
+         label: "OK",
+         onPressed:(){
+           Scaffold.of(context).hideCurrentSnackBar();
+         },
+       ),
+     );
+     Scaffold.of(context).showSnackBar(snackBar);
+   }
+
+  }
+
+  Future<bool> checkIfPermissionGranted(BuildContext context) async {
+    Map<Permission, PermissionStatus> statuses = await [Permission.camera, Permission.microphone].request();
+    bool permitted = true;
+
+    statuses.forEach((permission, permissionStatus) {
+      if(!permissionStatus.isGranted)
+        permitted = false;
+    });
+    return permitted;
   }
 
 }
