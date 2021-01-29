@@ -7,6 +7,15 @@ class CameraState extends ChangeNotifier{
   CameraDescription _cameraDescription;
   bool _isReadyToTakePhoto = false;
 
+  void dispose(){
+    if (_controller != null)
+      _controller.dispose();
+    _controller = null;
+    _cameraDescription = null;
+    _isReadyToTakePhoto = false;
+    notifyListeners();
+  }
+
   void getReadyToTakePhoto() async {
     List<CameraDescription> cameras = await availableCameras();
 
@@ -19,7 +28,7 @@ class CameraState extends ChangeNotifier{
       init = await initialize();
     }
     _isReadyToTakePhoto = true;
-    notifyListeners();
+    notifyListeners();//변경 사항을 알려줌.
   }
 
   void setCameraDescription(CameraDescription cameraDescription){
