@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/durations.dart';
+import 'package:flutter_app/widgets/take_photo.dart';
 
 class CameraScreen extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _CameraScreenState extends State<CameraScreen> {
         controller: _pageController,
         children: <Widget>[
           Container(color: Colors.red,),
-          Container(color: Colors.blue,),
+          TakePhoto(),
           Container(color: Colors.green,),
         ],
 
@@ -70,3 +71,4 @@ class _CameraScreenState extends State<CameraScreen> {
     });
   }
 }
+
