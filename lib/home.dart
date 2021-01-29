@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/camera_screen.dart';
 import 'package:flutter_app/screens/feed_screen.dart';
@@ -26,6 +24,7 @@ class _HomePageState extends State<HomePage> {
     BottomNavigationBarItem(icon: Icon(Icons.account_circle), label: ''),
   ];
   int _selectedIndex = 0;
+  GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   static List<Widget> _screens = [
     FeedScreen(),
@@ -40,6 +39,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     if (size==null) size = MediaQuery.of(context).size;
     return Scaffold(
+      key: _key,
       body: IndexedStack(
         index: _selectedIndex,
         children: _screens,
@@ -78,11 +78,11 @@ class _HomePageState extends State<HomePage> {
        action: SnackBarAction(
          label: "OK",
          onPressed:(){
-           Scaffold.of(context).hideCurrentSnackBar();
+           _key.currentState.hideCurrentSnackBar();
          },
        ),
      );
-     Scaffold.of(context).showSnackBar(snackBar);
+     _key.currentState.showSnackBar(snackBar);
    }
 
   }
