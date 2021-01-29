@@ -1,11 +1,11 @@
 import 'package:camera/camera.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/foundation.dart';
 
-class CameraState extends ChangeNotifierProvider{
+class CameraState extends ChangeNotifier{
 
   CameraController _controller;
   CameraDescription _cameraDescription;
-  bool _isReadyToTakePhoto;
+  bool _isReadyToTakePhoto = false;
 
   void getReadyToTakePhoto() async {
     List<CameraDescription> cameras = await availableCameras();
@@ -18,6 +18,8 @@ class CameraState extends ChangeNotifierProvider{
     while(!init){
       init = await initialize();
     }
+    _isReadyToTakePhoto = true;
+    notifyListeners();
   }
 
   void setCameraDescription(CameraDescription cameraDescription){
