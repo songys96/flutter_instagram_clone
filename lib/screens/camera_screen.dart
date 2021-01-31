@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/constants/durations.dart';
 import 'package:flutter_app/models/camera_state.dart';
+import 'package:flutter_app/models/gallery_state.dart';
+import 'package:flutter_app/widgets/my_gallery.dart';
 import 'package:flutter_app/widgets/take_photo.dart';
 import 'package:provider/provider.dart';
 
 class CameraScreen extends StatefulWidget {
+
   CameraState _cameraState = CameraState();
+  GalleryState _galleryState = GalleryState();
+
   @override
   _CameraScreenState createState() {
     _cameraState.getReadyToTakePhoto();
+    _galleryState.initProvider();
     return _CameraScreenState();
   }
 }
@@ -30,14 +36,17 @@ class _CameraScreenState extends State<CameraScreen> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<CameraState>.value(value: widget._cameraState)
+        ChangeNotifierProvider<CameraState>.value(value: widget._cameraState),
+        ChangeNotifierProvider<GalleryState>.value(value: widget._galleryState),
+        //ChangeNotifierProvider<CameraState>(create: (_) => widget._cameraState),
+        //ChangeNotifierProvider<GalleryState>(create: (_) => widget._galleryState),
       ],
       child: Scaffold(
         appBar: AppBar(title: Text(_title),),
         body: PageView(
           controller: _pageController,
           children: <Widget>[
-            Container(color: Colors.red,),
+            MyGallery(),
             TakePhoto(),
             Container(color: Colors.green,),
           ],
