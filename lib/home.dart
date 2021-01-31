@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/camera_screen.dart';
 import 'package:flutter_app/screens/feed_screen.dart';
 import 'package:flutter_app/screens/profile_screen.dart';
+import 'package:flutter_app/screens/search_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'constants/screens_size.dart';
@@ -31,7 +32,7 @@ class _HomePageState extends State<HomePage> {
 
   static List<Widget> _screens = [
     FeedScreen(),
-    Container(color: Colors.blueAccent,),
+    SearchScreen(),
     Container(color: Colors.redAccent,),
     Container(color: Colors.purpleAccent,),
     ProfileScreen(),
